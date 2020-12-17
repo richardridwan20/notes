@@ -10,7 +10,7 @@ component "Lead Gen Microservice" as lg
 actor "Telemarketing" as tele
 component "Product Microservice" as product
 package "Super You Legacy System (Monolithic)" as superyou {
-    partnership --> (verification): "3a. API Partnership"
+    partnership --> (verification): "3c. API Partnership"
     (verification) --> (payment)
     (payment) --> (policy)
     (policy) --> (createPDF)
@@ -20,8 +20,8 @@ external --> (verification): "Channel 1: Super You Direct Sales"
 external --> lg: "Channel 2"
 lg --> tele: Lead Gen Telemarketing
 tele --> (verification)
-partnership --> lg: 3b
-partnership --> (verification): "3c. Bulk Insert"
+partnership --> lg: 3a.
+partnership --> (verification): "3b. Bulk Insert"
 ' lg --> tele: Lead Gen Telemarketing
 ' tele --> (verification)
 

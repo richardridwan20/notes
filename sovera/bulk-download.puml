@@ -1,0 +1,24 @@
+@startuml partnership-microservice
+left to right direction
+skinparam actorStyle awesome
+
+actor "User" as user
+package "Sovera API (sovera-api.sequis.co.id)" as sovapi {
+    ' partnership --> (verification): "3c. API Partnership"
+    (createTransaction) --> (createPDF)
+    (createPDF)
+}
+
+package "Sovera Dashboard (sovera.sequis.co.id)" as sovera {
+    ' partnership --> (verification): "3c. API Partnership"
+    (bulk upload)
+    folder "storage/app/public/files/certificates" {
+    ["policy.pdf"]
+  }
+}
+
+user --> (bulk upload): "1. Bulk Upload"
+(bulk upload) --> (createTransaction): "2. Import"
+(createPDF) --> ["policy.pdf"]: "3. Store in storage"
+
+@enduml
