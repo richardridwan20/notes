@@ -1,0 +1,44 @@
+
+@startuml checkpoint3
+left to right direction
+skinparam actorStyle awesome
+
+package "Evan's Discussion Points" as evan {
+    actor "Partner" as partner
+    component "Partnership Microservice" as partnershipms
+
+    package "Telemarketing Process" as teleprocess {
+        component "Grandspot" as grandspot
+        actor "Mas Ardi" as ardi
+        actor "Telemarketing" as telem
+        component "SASSY" as sassy
+        partnershipms --> ardi: "Download CSV"
+        ardi --> grandspot: "Upload CSV"
+        grandspot <..> telem: "Tele Process"
+        telem --> sassy: "Upload CSV"
+    }
+
+    partner --> partnershipms
+}
+
+package "Mas Kun's Discussion Points" as kuncoro {
+    actor "Partner" as partnerkun
+    component "Partnership Microservice" as partnership
+    component "Lead Gen Microservice" as leadgen
+
+    package "Telemarketing Process" as teleprocesskun {
+        component "Grandspot" as grandspots
+        actor "Mas Ardi" as ardis
+        actor "Telemarketing" as telems
+        component "SASSY" as sassys
+        ardis --> grandspots: "Upload CSV"
+        grandspots <..> telems: "Tele Process"
+        telems --> sassys: "Upload CSV"
+    }
+
+    partnerkun --> partnership
+    partnership --> leadgen
+    leadgen --> ardis: "Download CSV"
+}
+
+@enduml

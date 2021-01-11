@@ -5,17 +5,36 @@ skinparam actorStyle awesome
 
 actor "Customer" as external
 component "Partnership Microservice" as partnership
-component "UW Microservice" as uw
 component "Lead Gen Microservice" as lg
 actor "Telemarketing" as tele
 component "Product Microservice" as product
 package "Super You Legacy System (Monolithic)" as superyou {
-    partnership --> (verification): "3c. API Partnership"
-    (verification) --> (payment)
-    (payment) --> (policy)
-    (policy) --> (createPDF)
-    (createPDF) --> (dashboard)
+    partnership --> (current process): "3c. API Partnership"
+    ' (verification) --> (payment)
+    ' (payment) --> (policy)
+    ' (policy) --> (createPDF)
+    ' (createPDF) --> (dashboard)
 }
+
+package "Evan's Discussion Points" as evan {
+    actor "Partner" as partner
+    component "Partnership Microservice" as partnershipms
+    component "Lead Gen Microservice" as leadgenms
+
+    package "Telemarketing Process" as teleprocess {
+        component "Grandspot" as grandspot
+        actor "Mas Ardi" as ardi
+        actor "Telemarketing" as telem
+        component "SASSY" as sassy
+        partnershipms --> ardi: "Download CSV"
+        ardi --> grandspot: "Upload CSV"
+        grandspot <..> telem: "Tele Process"
+        telem --> sassy: "Upload CSV"
+    }
+
+    partner --> partnershipms
+}
+
 external --> (verification): "Channel 1: Super You Direct Sales"
 external --> lg: "Channel 2"
 lg --> tele: Lead Gen Telemarketing
@@ -27,7 +46,6 @@ partnership --> (verification): "3b. Bulk Insert"
 
 external --> partnership: "Channel 3"
 partnership <..> product
-(payment) <..> uw
 
 ' superyou --> payment
 ' sovera --> payment

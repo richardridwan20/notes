@@ -1,0 +1,17 @@
+@startuml partnership-microservice
+left to right direction
+skinparam actorStyle awesome
+
+actor "User" as user
+
+package "Sovera Dashboard (sovera.sequis.co.id)" as sovera {
+    (download policy)
+    folder "storage/app/public/files/certificates" {
+    ["policy.pdf"]
+  }
+}
+
+user --> (download policy): "1. Clicks download Policy"
+(download policy) --> ["policy.pdf"]: "2. Search for policy"
+
+@enduml
